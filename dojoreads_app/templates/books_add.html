@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block titulo %}ADD BOOK & REVIEW{% endblock %}
+{% block enlaces_sup %}
+<a href="/">Home</a>
+{% endblock %} 
+
+{% block contenido %}
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <h2> Add a New Book Title and a Review:</h2>
+          
+        </div>
+    </div>
+    <form action="/books/add" method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-3">
+                <div class="mb-3">
+                    <label for="BookTitle" class="form-label"><h4>Book Title</h4></label>
+                   
+                </div>
+            </div>
+            <div class="col-5">
+                <input type="text" class="form-control" id="BookTitle" placeholder="Book Title" name="title">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8"><h4>Author:</h4></div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                Choose from the list:
+            </div>
+            <div class="col-5 ">
+                <select class="form-select" aria-label="Default select example" name="author" id="author">
+                    <option selected>Open this select menu</option>
+                    {% for autor in autores %}
+                    <option value="{{autor.id}}">{{autor.first_name}} {{autor.last_name}}</option>
+                    {% endfor %}
+                    <option value="other">New Author</option>
+                </select>
+            </div>
+        </div>
+        <div class="row d-none" id="hidden_author">
+            <div class="col-3">
+                Add new Author:
+            </div>
+            <div class="col-5">
+                <div class="row">
+                    <div class="col">
+                        <input type="text" name="first_name" id="first_name" class="form-control form-control-sm d-none" placeholder="First Name">
+                    </div>
+                    <div class="col">
+                        <input type="text" name="last_name" id="last_name" class="form-control form-control-sm d-none" placeholder="Last Name">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-3">
+                <h4>Review:</h4>
+            </div>
+            <div class="col-5">
+                <textarea class="form-control" id="review_text" rows="3" name="review_text"></textarea>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-3"><h4>Rating:</h4></div>
+            <div class="col-5"><input type="number" name="stars" id="stars" min="1" max="5"
+                value="5"> Stars </div>
+        </div>
+        <div class="row">
+            <div class="col-8 d-flex flex-row-reverse">
+                <input type="submit" value="Add Book and Review" class="btn btn-outline-primary">
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    $('#author').on('change',function(){
+        if($(this).val()=='other'){            
+            $('#hidden_author').removeClass('d-none');
+            $('#first_name').removeClass('d-none');
+            $('#last_name').removeClass('d-none');
+            $('#first_name').focus();
+        }
+        else{
+            $('#hidden_author').addClass('d-none');
+            $('#first_name').addClass('d-none');
+            $('#last_name').addClass('d-none');
+        }        
+    });
+</script>
+
+{% endblock %}
+
+{% block libreria %}
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block titulo %}USERS{% endblock %}
+
+{% block contenido %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h4>User Alias : {{request.session.user.name}}</h4>
+            <h4>Name : {{request.session.user.name}}</h4>
+            <h4>Email : {{request.session.user.email}}</h4>
+            <h4>Total Reviews:{{n_reviews}}</h4>
+        </div>
+    </div>
+    <div class="row mt-6">
+        <div class="col">
+            <h4>Posted Reviews on the following books:</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            {%for review in reviews%}
+            <div class="row ms-4">
+                <div class="col ">
+                    <a href="/books/{{review.book.id}}">  {{review.book.title}}</a>
+                  
+                </div>
+            </div>               
+            {% empty %}
+                Sin Reviews 
+            {%endfor%}
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block libreria %}
+{% endblock %}

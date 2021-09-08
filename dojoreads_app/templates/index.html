@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block titulo %}INDEX USUARIO{% endblock %}
+
+{% block contenido %}
+<h2>Recent Books Reviews:</h2>
+{% load static %}
+<style>
+    .estrella{
+        width: 15px;
+    }
+</style>
+<div class="container">
+    
+    <div class="row mb-3">
+        <div class="col-5">
+            {% for review in reviews %}
+                <h4><a href="/books/{{review.book.id}}">
+                    {{review.book.title}}
+                </a>
+                </h4>
+                <h4>Rating: {{review.stars}}
+                </h4>
+                <h6><a href="/users/{{review.owner.id}}">{{review.owner}}</a>
+                    :{{review.texto}}</h6>
+            {% empty %}
+                Aun no existen Reviews
+            {% endfor %}
+        </div>
+        <div class="col-2"></div>
+        <div class="col-5 sm-6">
+            <h4>Other Books with Reviews:</h4>
+            <div class="overflow-auto" heigth="20px">
+                {% for or in other_reviews %}
+                <p>
+                    <a href="/books/{{or.book.id}}">
+                        {{or.book.title}}
+                    </a>
+                </p>                
+                {% empty %}
+                    Aun no existen Reviews
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+    
+      
+    
+
+
+{% endblock %}
+
+{% block libreria %}
+{% endblock %}
