@@ -6,8 +6,8 @@
 <h2>Recent Books Reviews:</h2>
 {% load static %}
 <style>
-    .estrella{
-        width: 15px;
+    .yellow { 
+        color: yellow !important;
     }
 </style>
 <div class="container">
@@ -19,7 +19,13 @@
                     {{review.book.title}}
                 </a>
                 </h4>
-                <h4>Rating: {{review.stars}}
+                <h4>Rating:{{review.stars}}
+                    {% with ''|center:review.stars as range %}
+                        {% for i in range %}
+                            <span class="material-icons text-secondary star yellow">star</span>
+                        {% endfor %}
+                    {% endwith %}
+                     
                 </h4>
                 <h6><a href="/users/{{review.owner.id}}">{{review.owner}}</a>
                     :{{review.texto}}</h6>

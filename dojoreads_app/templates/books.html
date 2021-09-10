@@ -3,6 +3,11 @@
 {% block titulo %}BOOKS{% endblock %}
 
 {% block contenido %}
+<style>
+    .yellow { 
+        color: yellow !important;
+    }
+</style>
 <div class="container">
     <div class="row">
         <div class="col">
@@ -28,8 +33,12 @@
             <hr>
             <div class="row ms-4">
                 <div class="col ">
-                    <h4>Rating: {{review.stars}}
-                        
+                    <h4>Rating: 
+                        {% with ''|center:review.stars as range %}
+                            {% for i in range %}
+                                <span class="material-icons text-secondary star yellow">star</span>
+                            {% endfor %}
+                        {% endwith %}                         
                     </h4>
                     <h6><a href="/users/{{review.owner.id}}">{{review.owner}}</a>
                         :{{review.texto}}</h6>
